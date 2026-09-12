@@ -373,26 +373,104 @@ export default function AdminDashboard() {
   }, [entries, cursor]);
 
   const stats = useMemo(() => {
-    const activeDays = Object.keys(monthMap).filter(
-      (date) => monthMap[date]?.color
+    const eventDays = new Set();
+    const examDays = new Set();
+    const sportHplDays = new Set();
+
+    const displayedDates = Object.keys(monthMap).filter(
+      (date) => /^\d{4}-\d{2}-\d{2}$/.test(date)
+    );
+
+    const monthPrefix = displayedDates.length
+      ? displayedDates
+          .sort()
+          .find((date) => date.startsWith(
+            displayedDates[0].slice(0, 7)
+          ))
+          ?.slice(0, 7)
+      : null;
+
+    if (!monthPrefix) {
+      return {
+        events: 0,
+        exams: 0,
+        sports: 0,
+        days: 0,
+      };
+    }
+
+    const [currentYear, currentMonthNumber] = monthPrefix
+      .split("-")
+      .map(Number);
+
+    const currentMonth = currentMonthNumber - 1;
+
+    entries.forEach((entry) => {
+      if (!entry.startDate || !entry.endDate) return;
+
+      const type = String(entry.type || "").trim().toLowerCase();
+
+      getDatesInRange(entry.startDate, entry.endDate).forEach((date) => {
+        if (!date.startsWith(monthPrefix)) return;
+
+        if (type === "event") {
+          eventDays.add(date);
+        }
+
+        if (type === "exam") {
+          examDays.add(date);
+        }
+
+        if (type === "sport" || type === "sports" || type === "hpl") {
+          sportHplDays.add(date);
+        }
+      });
+    });
+
+    /*
+     * Two days immediately before an exam are restricted
+     * for normal hostel activities.
+     */
+    const examRestrictionDays = new Set();
+
+    examDays.forEach((date) => {
+      const examDate = new Date(`${date}T00:00:00`);
+
+      for (let i = 1; i <= 2; i++) {
+        const restrictedDate = new Date(examDate);
+        restrictedDate.setDate(restrictedDate.getDate() - i);
+
+        const restrictedIso = isoDate(restrictedDate);
+
+        if (restrictedIso.startsWith(monthPrefix)) {
+          examRestrictionDays.add(restrictedIso);
+        }
+      }
+    });
+
+    const daysInMonth = new Date(
+      currentYear,
+      currentMonth + 1,
+      0
+    ).getDate();
+
+    const unavailableDays = new Set([
+      ...examDays,
+      ...examRestrictionDays,
+    ]);
+
+    const availableActivityDays = Math.max(
+      0,
+      daysInMonth - unavailableDays.size
     );
 
     return {
-      events: entries.filter(
-        (e) => String(e.type).toLowerCase() === "event"
-      ).length,
-
-      exams: entries.filter(
-        (e) => String(e.type).toLowerCase() === "exam"
-      ).length,
-
-      sports: entries.filter((e) =>
-        ["sport", "hpl"].includes(String(e.type).toLowerCase())
-      ).length,
-
-      days: activeDays.length,
+      events: eventDays.size,
+      exams: examDays.size,
+      sports: sportHplDays.size,
+      days: availableActivityDays,
     };
-  }, [entries, monthMap]);
+  }, [entries, cursor]);
 
   const upcoming = useMemo(() => {
     const today = isoDate(new Date());
@@ -510,25 +588,25 @@ export default function AdminDashboard() {
 
             <div className="stat-card">
               <div className="stat-number">{stats.events}</div>
-              <div className="stat-label">Events</div>
+              <div className="stat-label">Event Days</div>
               <div className="stat-icon stat-blue">◆</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-number">{stats.exams}</div>
-              <div className="stat-label">Exams</div>
+              <div className="stat-label">Exam Days</div>
               <div className="stat-icon stat-red">▤</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-number">{stats.sports}</div>
-              <div className="stat-label">Sports / HPL</div>
+              <div className="stat-label">Sports / HPL Days</div>
               <div className="stat-icon stat-green">●</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-number">{stats.days}</div>
-              <div className="stat-label">Active Days</div>
+              <div className="stat-label">Available Activity Days</div>
               <div className="stat-icon stat-yellow">◆</div>
             </div>
 
