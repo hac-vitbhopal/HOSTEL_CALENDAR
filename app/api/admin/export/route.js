@@ -7,7 +7,7 @@ export async function GET(request) {
     status: 200,
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="hec-calendar.csv"',
+      "Content-Disposition": 'attachment; filename="hac-calendar.csv"',
     },
   });
 }

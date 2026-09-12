@@ -90,7 +90,7 @@ a { color: inherit; }
 @media (max-width: 720px) { .site-shell { padding:0 10px 20px; }.institution-header { padding:14px 8px; }.institution h1 { font-size:1.05rem; }.institution p { font-size:.72rem; }.hac-logo { width:62px; height:62px; }.vit-logo { width:66px; height:66px; }.vit-copy h2 { font-size:1.25rem; }.vit-copy p,.vit-copy small { font-size:.65rem; }.calendar-heading { grid-template-columns:1fr; }.legend { grid-column:auto; grid-row:auto; flex-wrap:wrap; }.month-controls { justify-content:space-between; }.month-controls > div { min-width:0; flex:1; }.calendar-grid,.weekday-row { gap:3px; }.calendar-cell { min-height:72px; padding:6px; }.cell-exam span { display:none; }.cell-event { font-size:.56rem; }.side-list { grid-template-columns:1fr; }.site-footer { flex-wrap:wrap; justify-content:center; text-align:center; }.admin-form { grid-template-columns:1fr; }.field-wide { grid-column:auto; }.admin-form > button[type="submit"] { grid-column:auto; }.upload-form { grid-template-columns:1fr; } }
 
 /* =========================================================
-   MOBILE UI — HEC HOSTEL CALENDAR
+   MOBILE UI — HAC HOSTEL CALENDAR
    ========================================================= */
 
 @media (max-width: 720px) {

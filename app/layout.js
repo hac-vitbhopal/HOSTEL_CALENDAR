@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Hostel Calendar | HEC | ",
-  description: "Hostel Calendar for HEC, ",
+  title: "Hostel Calendar | HAC | VIT Bhopal",
+  description: "Hostel Calendar for the Hostel Administrative Council, VIT Bhopal.",
 };
 
 export default function RootLayout({ children }) {
