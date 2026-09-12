@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
 
   return (
     <main className="page admin-login">
-      <h1>HEC Admin</h1>
+      <h1>HAC Admin</h1>
       <p className="muted">Hostel Calendar administration</p>
       <form onSubmit={submit}>
         <input type="password" placeholder="Passcode" value={password} onChange={(e) => setPassword(e.target.value)} autoFocus />

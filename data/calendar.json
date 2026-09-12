@@ -78,5 +78,29 @@
     "title": "FAT — Term End Examination",
     "details": "Winter Semester 26-27 — Common for 2022, 2023, 2024, 2025 & 2026 admitted Int. M.Tech. & B.Arch.; 2022, 2023 & 2024 admitted Int. M.Sc.; 2023, 2024, 2025 & 2026 admitted B.Tech.; 2024, 2025 & 2026 admitted B.B.A.; 2026 B.Tech., Int. M.Tech., B.Arch., B.B.A. & M.Tech.",
     "batches": "2022, 2023, 2024, 2025, 2026 (program-specific batches listed in the academic calendar)"
+  },
+  {
+    "startDate": "2026-09-15",
+    "endDate": "2026-09-15",
+    "type": "Event",
+    "title": "test",
+    "details": "",
+    "batches": ""
+  },
+  {
+    "startDate": "2026-09-17",
+    "endDate": "2026-09-17",
+    "type": "HPL",
+    "title": "test2",
+    "details": "",
+    "batches": ""
+  },
+  {
+    "startDate": "2026-09-18",
+    "endDate": "2026-09-18",
+    "type": "HPL",
+    "title": "TEST3",
+    "details": "",
+    "batches": ""
   }
 ]

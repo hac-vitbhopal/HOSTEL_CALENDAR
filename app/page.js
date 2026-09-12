@@ -159,8 +159,24 @@ export default function Page() {
         </div>
         <div className="header-motto"><br /><strong></strong></div>
         <div className="institution identity-right">
-          <div className="vit-copy"><h2>VIT Bhopal</h2><p>Vellore Institute of Technology</p><small>Bhopal</small></div>
-          <div className="brand-logo-wrap vit-logo-wrap"><img className="brand-logo vit-logo" src="/vit-bhopal-logo.png" alt=" logo" /></div>
+          <div className="vit-copy">
+            <h2>VIT Bhopal</h2>
+            <p>Vellore Institute of Technology</p>
+            <small>Bhopal</small>
+          </div>
+
+          <a
+            href="/admin/login"
+            className="brand-logo-wrap vit-logo-wrap vit-admin-button"
+            aria-label="Open admin panel"
+            title="Admin panel"
+          >
+            <img
+              className="brand-logo vit-logo"
+              src="/vit-bhopal-logo.png"
+              alt="VIT Bhopal logo"
+            />
+          </a>
         </div>
       </header>
 
@@ -223,14 +239,30 @@ export default function Page() {
                 <div className="selected-head"><h4>{parseIso(selectedIso).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</h4><span>{selectedItems.length} item{selectedItems.length === 1 ? "" : "s"}</span></div>
                 {selectedItems.map((item, i) => {
                   const type = String(item.type).toLowerCase();
-                  return <div className={`selected-item selected-${TYPE_TO_COLOR[type] || "blue"}`} key={`${item.title}-${i}`}><span className="type-pill">{type === "exam" ? "Exam" : type}</span><div><strong>{type === "exam" ? examLabel(item) : item.title}</strong>{type === "exam" && item.batches && <span className="selected-batch">Batch {item.batches}</span>}{item.details && <small>{item.details}</small>}</div></div>;
+                  return <div className={`selected-item selected-${TYPE_TO_COLOR[type] || "blue"}`} key={`${item.title}-${i}`}><span className="type-pill">{type === "exam"
+                        ? "EXAM"
+                        : type === "hpl"
+                          ? "HPL"
+                          : type === "event"
+                            ? "EVENT"
+                            : type === "sport"
+                              ? "SPORT"
+                              : type === "holiday"
+                                ? "HOLIDAY"
+                                : type.toUpperCase()}</span><div><strong>{type === "exam" ? examLabel(item) : item.title}</strong>{type === "exam" && item.batches && <span className="selected-batch">Batch {item.batches}</span>}{item.details && <small>{item.details}</small>}</div></div>;
                 })}
               </div>
             )}
           </section>
 
           <aside className="side-panel events-panel">
-            <div className="panel-heading"><div className="panel-icon event-icon">◈</div><div><h3>Events</h3><p>All hostel events this month</p></div></div>
+            <div className="panel-heading">
+              <div className="panel-icon event-icon">◈</div>
+              <div>
+                <h3>EVENTS</h3>
+                <p>All hostel events this month</p>
+              </div>
+            </div>
             <div className="side-list">
               {events.length === 0 ? <div className="empty-state">No events this month.</div> : events.map((item, index) => (
                 <button className="event-card" key={`${item.startDate}-${index}`} onClick={() => setSelectedIso(item.startDate)}>
@@ -243,9 +275,7 @@ export default function Page() {
         </section>
       )}
 
-      <footer className="site-footer">
-        <a href="/admin/login">Team sign-in</a>
-      </footer>
+      
     </main>
   );
 }
