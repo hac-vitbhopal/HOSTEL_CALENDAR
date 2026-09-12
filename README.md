@@ -1,10 +1,10 @@
-# Hostel Calendar — HAC, VIT Bhopal
+# Hostel Calendar — VIT Bhopal
 
 A public hostel calendar with a passcode-protected admin panel. Calendar data is stored locally in `data/calendar.json` and can be managed manually through the admin panel.
 
 ## Features
 
-- Hostel Calendar dashboard for HAC / VIT Bhopal
+- Hostel Calendar dashboard for VIT Bhopal
 - Monthly calendar with color-toned date cards
 - Left panel for exams
 - Right panel for hostel events
@@ -71,4 +71,4 @@ The public UI intentionally displays exam entries as `CAT-1`, `CAT-2`, or `FAT` 
 
 `data/calendar.json` is suitable for a local machine or persistent server. Serverless deployments with ephemeral filesystems should use a persistent database or storage provider before relying on admin writes in production.
 
-## Made by Tech Team HAC VITB
+## Made by Tech Team HEC VITB
