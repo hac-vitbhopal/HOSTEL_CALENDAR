@@ -206,7 +206,7 @@ export default function Page() {
               {exams.length === 0 ? <div className="empty-state">No exams this month.</div> : exams.map((item, index) => (
                 <button className="exam-card" key={`${item.startDate}-${index}`} onClick={() => setSelectedIso(item.startDate)}>
                   <div className="date-tile exam-date"><strong>{parseIso(item.startDate).getDate()}</strong><span>{parseIso(item.startDate).toLocaleDateString("en-IN", { month: "short" }).toUpperCase()}</span></div>
-                  <div className="card-content"><strong>{examLabel(item)}</strong><span className="batch-text">{batchLabel(item)}</span><small>{formatDateRange(item)}</small></div>
+                  <div className="card-content"><strong>{examLabel(item)}</strong><small>{formatDateRange(item)}</small></div>
                 </button>
               ))}
             </div>
